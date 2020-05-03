@@ -48,7 +48,8 @@ INSTALLED_APPS = [
     'dj_rest_auth.registration',
 
     # local
-    'posts'
+    'posts',
+    'frontend'
 ]
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': ('rest_framework.permissions.IsAuthenticated',),
