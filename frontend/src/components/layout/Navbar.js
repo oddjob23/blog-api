@@ -1,5 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import Dropdown from "../Dropdown";
 
 const Navbar = (props) => {
   return (
@@ -14,9 +15,7 @@ const Navbar = (props) => {
               Sign In
             </Link>
           ) : (
-            <Link className="nav-link" to="/profile">
-              {props.username}
-            </Link>
+            <Dropdown label={props.username} options={["profile", "logout"]} />
           )}
         </li>
       </ul>

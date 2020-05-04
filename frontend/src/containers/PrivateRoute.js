@@ -5,7 +5,6 @@ class PrivateRoute extends React.Component {
   render() {
     const Component = this.props.component;
     const isAuthenticated = localStorage.getItem("token");
-    console.log(isAuthenticated);
     return isAuthenticated ? (
       <Component />
     ) : (
