@@ -40,21 +40,31 @@ const Login = () => {
   return (
     <div>
       <form id="login" onSubmit={onSubmit}>
-        <label htmlFor="username">Username</label>
-        <input
-          type="text"
-          id="username"
-          name="username"
-          onChange={handleChange}
-        />
-        <label htmlFor="password">Password</label>
-        <input
-          type="password"
-          id="password"
-          name="password"
-          onChange={handleChange}
-        />
-        <button type="submit">Login</button>
+        <div className="form-group">
+          <label htmlFor="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            onChange={handleChange}
+            className="form-control"
+          />
+        </div>
+
+        <div className="form-group">
+          <label htmlFor="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            onChange={handleChange}
+            className="form-control"
+          />
+        </div>
+
+        <button type="submit" className="btn btn-success">
+          Login
+        </button>
       </form>
     </div>
   );
