@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Redirect } from 'react-router-dom';
 
 const Login = () => {
   const [creds, setCreds] = useState({
     username: "",
     password: "",
   });
+  const [token, setToken] =useState('');
+
   const onSubmit = (e) => {
     e.preventDefault();
     console.log("form submitted");
@@ -19,6 +22,7 @@ const Login = () => {
       })
       .then((result) => {
         console.log(result);
+        setToken(result.data.key);
       })
       .catch((err) => {
         console.log(err);
@@ -35,39 +39,49 @@ const Login = () => {
     });
   };
   useEffect(() => {
-    console.log(creds);
-  }, [creds]);
-  return (
-    <div>
-      <form id="login" onSubmit={onSubmit}>
-        <div className="form-group">
-          <label htmlFor="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            onChange={handleChange}
-            className="form-control"
-          />
-        </div>
+    // get token
+    const t = localStorage.getItem('token');
+    if (t !== null) setToken(t);
+  }, [])
+  useEffect(() => {
+    localStorage.setItem('token', token);
+  }, [token]);
+  if (token === '') {
+    return (
+      <div>
+        <form id="login" onSubmit={onSubmit}>
+          <div className="form-group">
+            <label htmlFor="username">Username</label>
+            <input
+              type="text"
+              id="username"
+              name="username"
+              onChange={handleChange}
+              className="form-control"
+            />
+          </div>
+  
+          <div className="form-group">
+            <label htmlFor="password">Password</label>
+            <input
+              type="password"
+              id="password"
+              name="password"
+              onChange={handleChange}
+              className="form-control"
+            />
+          </div>
+  
+          <button type="submit" className="btn btn-success">
+            Login
+          </button>
+        </form>
+      </div>
+    );
+  } else {
+    return <Redirect to="/" />
+  }
 
-        <div className="form-group">
-          <label htmlFor="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            onChange={handleChange}
-            className="form-control"
-          />
-        </div>
-
-        <button type="submit" className="btn btn-success">
-          Login
-        </button>
-      </form>
-    </div>
-  );
 };
 
 export default Login;
