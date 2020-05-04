@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Redirect } from 'react-router-dom';
+import { Redirect } from "react-router-dom";
 
 const Login = () => {
   const [creds, setCreds] = useState({
     username: "",
     password: "",
   });
-  const [token, setToken] =useState('');
+  const [token, setToken] = useState("");
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -22,7 +22,12 @@ const Login = () => {
       })
       .then((result) => {
         console.log(result);
-        setToken(result.data.key);
+        if (result.data.access !== undefined || result.data.access !== null) {
+          setToken(result.data.access);
+        } else {
+          alert("Error has occured");
+          console.log(result);
+        }
       })
       .catch((err) => {
         console.log(err);
@@ -40,16 +45,18 @@ const Login = () => {
   };
   useEffect(() => {
     // get token
-    const t = localStorage.getItem('token');
-    if (t !== null) setToken(t);
-  }, [])
+    const t = localStorage.getItem("token");
+    if (t !== null || t !== undefined) setToken(t);
+  }, []);
   useEffect(() => {
-    localStorage.setItem('token', token);
+    console.log("token has changed");
+    localStorage.setItem("token", token);
   }, [token]);
-  if (token === '') {
+  if (!token) {
     return (
       <div>
         <form id="login" onSubmit={onSubmit}>
+          <h1>{token}</h1>
           <div className="form-group">
             <label htmlFor="username">Username</label>
             <input
@@ -60,7 +67,7 @@ const Login = () => {
               className="form-control"
             />
           </div>
-  
+
           <div className="form-group">
             <label htmlFor="password">Password</label>
             <input
@@ -71,7 +78,7 @@ const Login = () => {
               className="form-control"
             />
           </div>
-  
+
           <button type="submit" className="btn btn-success">
             Login
           </button>
@@ -79,9 +86,8 @@ const Login = () => {
       </div>
     );
   } else {
-    return <Redirect to="/" />
+    return <Redirect to="/" />;
   }
-
 };
 
 export default Login;
