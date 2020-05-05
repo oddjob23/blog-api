@@ -6,7 +6,7 @@ from posts.views import ObtainTokenPairWithColorView
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('auth/', include('rest_framework.urls')),
-    path('api/', include('posts.urls')),
+    path('api/posts/', include('posts.urls')),
     path('api/auth/login/', ObtainTokenPairWithColorView.as_view()),
     path('auth/auth/refresh/', TokenRefreshView.as_view()),
     path('', include('frontend.urls'))
