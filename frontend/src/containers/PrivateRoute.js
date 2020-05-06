@@ -1,16 +1,25 @@
-import React from "react";
-import { Redirect } from "react-router-dom";
+import React, { useContext, useEffect } from "react";
+import AuthContext from "../context/authentication/AuthContext";
+import { Redirect, Route } from "react-router-dom";
 
-class PrivateRoute extends React.Component {
-  render() {
-    const Component = this.props.component;
-    const isAuthenticated = localStorage.getItem("token");
-    return isAuthenticated ? (
-      <Component />
-    ) : (
-      <Redirect to={{ pathname: "/login" }} />
-    );
-  }
+export default function PrivateRoute({ component: Component, ...rest }) {
+  const authContext = useContext(AuthContext);
+  const { isAuthenticated, checkIfAuthenticated } = authContext;
+
+  useEffect(() => {
+    checkIfAuthenticated();
+    console.log(isAuthenticated);
+  }, []);
+  return (
+    <Route
+      {...rest}
+      render={(props) => {
+        if (!isAuthenticated) {
+          return <Redirect to="/login" />;
+        } else {
+          return <Component {...props} />;
+        }
+      }}
+    />
+  );
 }
-
-export default PrivateRoute;

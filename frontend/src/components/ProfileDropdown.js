@@ -1,7 +1,9 @@
-import React, { useRef } from "react";
+import React, { useRef, useContext } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import AuthContext from "../context/authentication/AuthContext";
 const ProfileDropdown = ({ label, handleLogout }) => {
+  const authContext = useContext(AuthContext);
+  const { logout } = authContext;
   const dropDownEl = useRef(null);
   const dropDownMenuEl = useRef(null);
   const handleClick = () => {
@@ -13,19 +15,7 @@ const ProfileDropdown = ({ label, handleLogout }) => {
       dropDownMenuEl.current.classList.remove("show");
     }
   };
-  const logout = () => {
-    console.log("here");
-    const res = axios
-      .get("/auth/logout")
-      .then((result) => {
-        if (result.status === 200) {
-          handleLogout();
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+
   return (
     <div className="dropdown" ref={dropDownEl}>
       <button
