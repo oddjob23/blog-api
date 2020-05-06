@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from "react";
 import { Link } from "react-router-dom";
 import ProfileDropdown from "../ProfileDropdown";
 import AuthContext from "../../context/authentication/AuthContext";
+import routes from "../../routes/routes.json";
 const Navbar = () => {
   const authContext = useContext(AuthContext);
   const { user, logout, checkIfAuthenticated } = authContext;
@@ -16,12 +17,12 @@ const Navbar = () => {
       </a>
       <ul className="navbar-nav px-3">
         <li className="nav-item text-nowrap">
-          {!user ? (
+          {!user.username ? (
             <>
-              <Link className="nav-link" to="/login">
+              <Link className="nav-link" to={routes.LOGIN}>
                 Sign In
               </Link>
-              <Link className="nav-link" to="/register">
+              <Link className="nav-link" to={routes.SIGNUP}>
                 Register
               </Link>
             </>

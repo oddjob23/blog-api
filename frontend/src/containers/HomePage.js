@@ -5,6 +5,9 @@ import AuthContext from "../context/authentication/AuthContext";
 const HomePage = () => {
   const authContext = useContext(AuthContext);
   const { isAuthenticated, checkIfAuthenticated, parseJWT, user } = authContext;
+  useEffect(() => {
+    checkIfAuthenticated();
+  }, []);
   return (
     <>
       <div className="container-fluid">

@@ -70,7 +70,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
         token = jwt.encode({
             'id': self.pk,
-            'exp': f'{round(dt.timestamp())}'
+            'exp': f'{round(dt.timestamp())}',
+            'username': self.username,
+            'email': self.email
         }, settings.SECRET_KEY, algorithm='HS256')
 
         return token.decode('utf-8')

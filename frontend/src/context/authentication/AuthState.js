@@ -32,11 +32,16 @@ const AuthState = (props) => {
   const checkIfAuthenticated = () => {
     const token = localStorage.getItem("token");
     console.log(token, typeof token);
-    if (token !== null && token !== undefined && token !== "") {
-      console.log("herherherhe");
+    if (
+      token !== null &&
+      token !== undefined &&
+      token !== "" &&
+      state.token !== null
+    ) {
+      const user = parseJWT(token);
       return dispatch({
         type: CHECK_IF_AUTHENTICATED,
-        payload: { isAuthenticated: true, token },
+        payload: { isAuthenticated: true, token, user },
       });
     } else {
       return dispatch({
@@ -59,7 +64,8 @@ const AuthState = (props) => {
           })
           .join("")
       );
-      return dispatch({ type: PARSE_JWT, payload: JSON.parse(jsonPayload) });
+      const data = JSON.parse(jsonPayload);
+      return data;
     }
   };
   const logout = () => {
@@ -102,15 +108,25 @@ const AuthState = (props) => {
   };
   const register = (creds) => {
     axios
-      .post("/api/auth/register", {
+      .post("/api/auth/register/", {
         headers: {
           "Content-Type": "application/json",
         },
-        creds,
+        user: {
+          username: creds.username,
+          email: creds.email,
+          password: creds.password,
+        },
       })
       .then((result) => {
         if (result.status === 201) {
-          dispatch({ type: REGISTER });
+          localStorage.setItem("token", result.data.user.token);
+          const user = JSON.stringify(result.data.user);
+          localStorage.setItem("user", user);
+          dispatch({
+            type: REGISTER,
+            payload: { user: result.data.user, token: result.data.user.token },
+          });
         } else {
           dispatch({ type: COLLECT_ERRORS, payload: result.status });
         }
@@ -131,6 +147,7 @@ const AuthState = (props) => {
         checkIfAuthenticated,
         logout,
         login,
+        register,
       }}
     >
       {children}

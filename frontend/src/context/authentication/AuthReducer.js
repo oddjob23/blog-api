@@ -12,10 +12,15 @@ export default (state, action) => {
       return state;
     case CHECK_IF_AUTHENTICATED:
       console.log(`payload received: ${action.payload}`);
+
+      console.log(action.payload);
       return {
         ...state,
         isAuthenticated: action.payload.isAuthenticated,
         token: action.payload.token,
+        user: {
+          ...action.payload.user,
+        },
       };
     case PARSE_JWT:
       return {
@@ -46,6 +51,11 @@ export default (state, action) => {
     case REGISTER: {
       return {
         ...state,
+        token: action.payload.token,
+        isAuthenticated: true,
+        user: {
+          ...action.payload.user,
+        },
       };
     }
     case ERROR: {
