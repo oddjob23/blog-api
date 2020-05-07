@@ -22,6 +22,7 @@ const AuthState = (props) => {
       email: undefined,
     },
     error: {
+      active: false,
       message: undefined,
       email: undefined,
     },
@@ -31,7 +32,6 @@ const AuthState = (props) => {
 
   const checkIfAuthenticated = () => {
     const token = localStorage.getItem("token");
-    console.log(token, typeof token);
     if (
       token !== null &&
       token !== undefined &&
@@ -133,7 +133,13 @@ const AuthState = (props) => {
       })
       .catch((err) => {
         console.log(err);
-        dispatch({ type: ERROR, payload: err });
+        const data = {
+          ...err,
+          username: err.response.data.user.username,
+          email: err.response.data.user.email,
+          password: err.response.data.user.password,
+        };
+        dispatch({ type: ERROR, payload: data });
       });
   };
   return (

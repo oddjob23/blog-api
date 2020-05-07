@@ -12,24 +12,26 @@ const Navbar = () => {
   }, []);
   return (
     <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-      <a className="navbar-brand col-sm-3 col-md-2 mr-0" href="#">
+      <a className="navbar-brand" href="#">
         All In One
       </a>
-      <ul className="navbar-nav px-3">
-        <li className="nav-item text-nowrap">
-          {!user.username ? (
-            <>
+      <ul className="navbar-nav ml-auto">
+        {!user.username ? (
+          <div className="d-flex">
+            <li className="nav-item mr-2">
               <Link className="nav-link" to={routes.LOGIN}>
                 Sign In
               </Link>
+            </li>
+            <li className="nav-item">
               <Link className="nav-link" to={routes.SIGNUP}>
                 Register
               </Link>
-            </>
-          ) : (
-            <ProfileDropdown label={user.username} handleLogout={logout} />
-          )}
-        </li>
+            </li>
+          </div>
+        ) : (
+          <ProfileDropdown label={user.username} handleLogout={logout} />
+        )}
       </ul>
     </nav>
   );

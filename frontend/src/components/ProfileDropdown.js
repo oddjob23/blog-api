@@ -8,7 +8,6 @@ const ProfileDropdown = ({ label, handleLogout }) => {
   const dropDownMenuEl = useRef(null);
   const handleClick = () => {
     dropDownEl.current.classList.toggle("show");
-    console.log(dropDownEl.current);
     if (dropDownEl.current.classList.contains("show")) {
       dropDownMenuEl.current.classList.add("show");
     } else {

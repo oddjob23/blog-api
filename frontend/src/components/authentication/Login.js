@@ -30,7 +30,6 @@ const Login = () => {
         <div className="card">
           <div className="card-body">
             <form id="login" onSubmit={onSubmit}>
-              <h1>{token}</h1>
               <div className="form-group">
                 <label htmlFor="username">Username</label>
                 <input
@@ -39,6 +38,7 @@ const Login = () => {
                   name="username"
                   onChange={handleChange}
                   className="form-control"
+                  required
                 />
               </div>
 
@@ -50,6 +50,7 @@ const Login = () => {
                   name="password"
                   onChange={handleChange}
                   className="form-control"
+                  required
                 />
               </div>
               <p className="text-danger">

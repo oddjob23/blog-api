@@ -8,7 +8,6 @@ export default function PrivateRoute({ component: Component, ...rest }) {
 
   useEffect(() => {
     checkIfAuthenticated();
-    console.log(isAuthenticated);
   }, []);
   return (
     <Route

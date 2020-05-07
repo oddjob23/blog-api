@@ -11,9 +11,6 @@ export default (state, action) => {
     default:
       return state;
     case CHECK_IF_AUTHENTICATED:
-      console.log(`payload received: ${action.payload}`);
-
-      console.log(action.payload);
       return {
         ...state,
         isAuthenticated: action.payload.isAuthenticated,
@@ -45,7 +42,11 @@ export default (state, action) => {
         token: null,
         isAuthenticated: false,
         isLoading: false,
-        user: null,
+        user: {
+          username: undefined,
+          email: undefined,
+          token: null,
+        },
       };
     }
     case REGISTER: {
@@ -63,6 +64,7 @@ export default (state, action) => {
         ...state,
         error: {
           ...action.payload,
+          active: true,
           message: action.payload.response.data.user.non_field_errors,
           email: action.payload.response.data.user.email,
         },

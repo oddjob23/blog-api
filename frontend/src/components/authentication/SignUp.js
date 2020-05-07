@@ -9,13 +9,15 @@ const SignUp = () => {
   });
   const [toRedirect, setToRedirect] = useState(false);
   const authContext = useContext(AuthContext);
-  const { register, error } = authContext;
+  const {
+    register,
+    error,
+    isAuthenticated,
+    checkIfAuthenticated,
+  } = authContext;
   const onSubmit = (e) => {
     e.preventDefault();
     register(creds);
-    if (!error.email && !error.message) {
-      setToRedirect(true);
-    }
   };
   const handleChange = (e) => {
     e.persist();
@@ -26,7 +28,22 @@ const SignUp = () => {
       };
     });
   };
-  useEffect(() => {}, [toRedirect]);
+  useEffect(() => {
+    checkIfAuthenticated();
+    console.log(isAuthenticated);
+    if (isAuthenticated) {
+      setToRedirect(true);
+    } else {
+      setToRedirect(false);
+    }
+  }, []);
+  useEffect(() => {
+    if (isAuthenticated) {
+      setToRedirect(true);
+    } else {
+      setToRedirect(false);
+    }
+  }, [isAuthenticated]);
   if (!toRedirect) {
     return (
       <div className="container" style={{ marginTop: "48px" }}>
@@ -41,7 +58,11 @@ const SignUp = () => {
                   name="username"
                   onChange={handleChange}
                   className="form-control"
+                  required
                 />
+                {error.username && (
+                  <p className="text-danger">{error.username}</p>
+                )}
               </div>
               <div className="form-group">
                 <label htmlFor="email">Email</label>
@@ -51,7 +72,9 @@ const SignUp = () => {
                   placeholder="Enter an email address..."
                   name="email"
                   onChange={handleChange}
+                  required
                 />
+                {error.email && <p className="text-danger">{error.email}</p>}
               </div>
               <div className="form-group">
                 <label htmlFor="password">Password</label>
@@ -61,7 +84,11 @@ const SignUp = () => {
                   name="password"
                   onChange={handleChange}
                   className="form-control"
+                  required
                 />
+                {error.password && (
+                  <p className="text-danger">{error.password}</p>
+                )}
               </div>
 
               <button type="submit" className="btn btn-success">
