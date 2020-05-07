@@ -72,7 +72,8 @@ class User(AbstractBaseUser, PermissionsMixin):
             'id': self.pk,
             'exp': f'{round(dt.timestamp())}',
             'username': self.username,
-            'email': self.email
+            'email': self.email,
+            'admin': self.is_staff
         }, settings.SECRET_KEY, algorithm='HS256')
 
         return token.decode('utf-8')

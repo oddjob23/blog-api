@@ -1,6 +1,7 @@
 import React, { useState, useContext, useEffect } from "react";
 import AuthContext from "../../context/authentication/AuthContext";
 import { Redirect } from "react-router-dom";
+import routes from '../../routes/routes.json';
 const SignUp = () => {
   const [creds, setCreds] = useState({
     username: "",
@@ -100,7 +101,7 @@ const SignUp = () => {
       </div>
     );
   } else {
-    return <Redirect to="/" />;
+    return <Redirect to={routes.HOME} />;
   }
 };
 

@@ -10,6 +10,7 @@ import {
   AUTH_LOADING,
   REGISTER,
   ERROR,
+  CHECK_IF_ADMIN,
 } from "../types";
 const AuthState = (props) => {
   const { children } = props;
@@ -141,6 +142,13 @@ const AuthState = (props) => {
         };
         dispatch({ type: ERROR, payload: data });
       });
+  };
+  const checkIfAdmin = (user) => {
+    if (user.admin) {
+      dispatch({ type: CHECK_IF_ADMIN, payload: true });
+    } else {
+      dispatch({ type: CHECK_IF_ADMIN, payload: false });
+    }
   };
   return (
     <AuthContext.Provider

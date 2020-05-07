@@ -5,6 +5,7 @@ import {
   LOGOUT,
   REGISTER,
   ERROR,
+  CHECK_IF_ADMIN,
 } from "../types";
 export default (state, action) => {
   switch (action.type) {
@@ -18,6 +19,11 @@ export default (state, action) => {
         user: {
           ...action.payload.user,
         },
+      };
+    case CHECK_IF_ADMIN:
+      return {
+        ...state,
+        isAdmin: action.payload,
       };
     case PARSE_JWT:
       return {

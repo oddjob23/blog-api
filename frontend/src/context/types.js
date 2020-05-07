@@ -6,3 +6,8 @@ export const REGISTER = "REGISTER";
 export const AUTH_LOADING = "AUTH_LOADING";
 export const ERROR = "ERROR";
 export const COLLECT_ERRORS = "COLLECT_ERRORS";
+export const CHECK_IF_ADMIN = "CHECK_IF_ADMIN";
+
+// USERS
+
+export const GET_USERS = "GET_USERS";

@@ -7,6 +7,7 @@ import Navbar from "./components/layout/Navbar";
 import Sidebar from "./components/layout/Sidebar";
 import Login from "./components/authentication/Login";
 import AuthState from "./context/authentication/AuthState";
+import Users from "./components/apps/users/Users";
 
 import routes from "./routes/routes.json";
 import SignUp from "./components/authentication/SignUp";
@@ -19,7 +20,7 @@ export default function Routes() {
           <Switch>
             <Route path={routes.LOGIN} component={Login} />
             <Route path={routes.SIGNUP} component={SignUp} />
-            <PrivateRoute exact path={routes.HOME} component={HomePage} />
+            <PrivateRoute path={routes.HOME} component={HomePage} />
           </Switch>
         </Router>
       </AuthState>

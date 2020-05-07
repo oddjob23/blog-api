@@ -1,21 +1,31 @@
-import React from 'react'
-import { Home, File, ShoppingCart, Users, BarChart2, Layers } from 'react-feather';
-import { Link } from 'react-router-dom';
+import React from "react";
+import {
+  Home,
+  File,
+  ShoppingCart,
+  Users,
+  BarChart2,
+  Layers,
+} from "react-feather";
+import { Link } from "react-router-dom";
+import routes from "../../routes/routes.json";
 const Sidebar = () => {
-    return (
-        <nav className="col-md-2 d-none d-md-block bg-light sidebar">
+  return (
+    <nav className="col-md-2 d-none d-md-block bg-light sidebar">
       <div className="sidebar-sticky">
         <ul className="nav flex-column">
           <li className="nav-item">
             <Link className="nav-link active" to="/">
-              <span><Home /></span>
+              <span>
+                <Home />
+              </span>
               Dashboard <span className="sr-only">(current)</span>
             </Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/">
               <span>
-                  <File />
+                <File />
               </span>
               Orders
             </Link>
@@ -23,23 +33,23 @@ const Sidebar = () => {
           <li className="nav-item">
             <Link className="nav-link" to="/">
               <span>
-                  <ShoppingCart />
+                <ShoppingCart />
               </span>
               Products
             </Link>
           </li>
           <li className="nav-item">
-            <Link className="nav-link" to="/">
+            <Link className="nav-link" to={routes.USERS}>
               <span>
-                  <Users />
+                <Users />
               </span>
-              Customers
+              Users
             </Link>
           </li>
           <li className="nav-item">
             <Link className="nav-link" to="/">
               <span>
-                  <BarChart2 />
+                <BarChart2 />
               </span>
               Reports
             </Link>
@@ -54,7 +64,11 @@ const Sidebar = () => {
 
         <h6 className="sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted">
           <span>Saved reports</span>
-          <a className="d-flex align-items-center text-muted" href="#" aria-label="Add a new report">
+          <a
+            className="d-flex align-items-center text-muted"
+            href="#"
+            aria-label="Add a new report"
+          >
             <span data-feather="plus-circle"></span>
           </a>
         </h6>
@@ -86,7 +100,7 @@ const Sidebar = () => {
         </ul>
       </div>
     </nav>
-    )
-}
+  );
+};
 
-export default Sidebar
+export default Sidebar;
