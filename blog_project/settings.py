@@ -25,8 +25,7 @@ SECRET_KEY = '%e2ceiqyx9y0e^%l9@gr#*_zzw)gkn1xd%@7danbvaa5&$*h5h'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['ec2-54-165-234-81.compute-1.amazonaws.com']
-
+ALLOWED_HOSTS = ['ec2-54-165-234-81.compute-1.amazonaws.com', '54.165.234.81']
 
 # Application definition
 
@@ -88,7 +87,7 @@ WSGI_APPLICATION = 'blog_project.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'project',
+        'NAME': 'api',
         'USER': 'zante23',
         'PASSWORD': 'zante23',
         'HOST': 'localhost',

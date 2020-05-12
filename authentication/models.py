@@ -43,7 +43,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     is_staff = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now_add=True)
-
+ 
     USERNAME_FIELD = 'email'
     REQUIRED_FIELDS = ['username']
 
@@ -70,7 +70,7 @@ class User(AbstractBaseUser, PermissionsMixin):
 
         token = jwt.encode({
             'id': self.pk,
-            'exp': f'{round(dt.timestamp())}',
+            'exp': round(dt.timestamp()),
             'username': self.username,
             'email': self.email,
             'admin': self.is_staff
